@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Puzzle Cube Solver</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <h1>Puzzle Cube Solver</h1>
+
+  <h2>Orthographic Display (only depth of one is shown)</h2>
+  <div class="ortho-container">
+    <span>Front</span>
+    <span>Right</span>
+    <span>Top</span>
+    <span>Back</span>
+    <span>Left</span>
+    <span>Bot</span>
+    <div data-orthoContainer data-orthoFront class="square-container">
+      <div class="square-item blue selected"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+    </div>
+    <div data-orthoContainer data-orthoRight class="square-container">
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+    </div>
+    <div data-orthoContainer data-orthoTop class="square-container">
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+    </div>
+    <div data-orthoContainer data-orthoBack class="square-container">
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+    </div>
+    <div data-orthoContainer data-orthoLeft class="square-container">
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+    </div>
+    <div data-orthoContainer data-orthoBot class="square-container">
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+      <div class="square-item"></div>
+    </div>
+  </div>
+
+  <h3>Blue Piece</h3>
+  <div data-pieceContainer class="layer-container">
+    <span>Bot</span>
+    <span>Mid</span>
+    <span>Top</span>
+    <div data-squareContainer class="square-container">
+      <div class="square-item blue selected"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+      <div class="square-item blue"></div>
+    </div>
+    <button>Show Orthographic</button>
+  </div>
+
+  <h3>Green Piece</h3>
+  <div data-pieceContainer class="layer-container">
+    <span>Bot</span>
+    <span>Mid</span>
+    <span>Top</span>
+    <div data-squareContainer class="square-container">
+      <div class="square-item green selected"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+      <div class="square-item green"></div>
+    </div>
+    <button>Show Orthographic</button>
+  </div>
+
+  <h3>Red Piece</h3>
+  <div data-pieceContainer class="layer-container">
+    <span>Bot</span>
+    <span>Mid</span>
+    <span>Top</span>
+    <div data-squareContainer class="square-container">
+      <div class="square-item red selected"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+      <div class="square-item red"></div>
+    </div>
+    <button>Show Orthographic</button>
+  </div>
+
+  <h3>Purple Piece</h3>
+  <div data-pieceContainer class="layer-container">
+    <span>Bot</span>
+    <span>Mid</span>
+    <span>Top</span>
+    <div data-squareContainer class="square-container">
+      <div class="square-item purple selected"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+      <div class="square-item purple"></div>
+    </div>
+    <button>Show Orthographic</button>
+  </div>
+
+  <h3>Yellow Piece</h3>
+  <div data-pieceContainer class="layer-container">
+    <span>Bot</span>
+    <span>Mid</span>
+    <span>Top</span>
+    <div data-squareContainer class="square-container">
+      <div class="square-item yellow selected"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+    </div>
+    <div data-squareContainer class="square-container">
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+      <div class="square-item yellow"></div>
+    </div>
+    <button>Show Orthographic</button>
+  </div>
+
+  <button id="solve-button">Solve</button>
+
+  <div id="health-bar">
+    <span></span>
+  </div>
+
+  <div id="permutations">Permutations: 54/3422 </div>
+  <div id="excecution-time">Excecution Time: 4343ms</div>
+  <h3>Orthographic will be displayed ^^ when completed</h3>
+  <h3>Screen May Freeze For Awhile</h3>
+  <h3>Open Console Beforehand for Percentage Updates</h3>
+
+
+
+</body>
+</html>

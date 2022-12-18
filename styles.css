@@ -1,0 +1,102 @@
+*,*::before,*::after {
+    box-sizing: border-box;
+}
+
+:root {
+    --lightBlue: lightblue;
+    --blue: blue;
+    --lightGreen: lightgreen;
+    --green: green;
+    --red: red;
+    --lightRed: pink;
+    --purple: purple;
+    --lightPurple: rgb(226, 156, 226);
+    --yellow: yellow;
+    --lightYellow: lightyellow;
+}
+
+body {
+    background-color: lightgrey;
+}
+
+.ortho-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0px 5px;
+}
+
+.layer-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0px 5px;
+}
+
+.square-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.square-item {
+    background-color: white;
+    border: 1px solid black;
+    padding-bottom: 100%;
+}
+
+.square-item.blue:hover {
+    background-color: var(--lightBlue);
+}
+.square-item.blue.selected {
+    background-color: var(--blue);
+}
+.square-item.green:hover {
+    background-color: var(--lightGreen);
+}
+.square-item.green.selected {
+    background-color: var(--green);
+}
+.square-item.red:hover {
+    background-color: var(--lightRed);
+}
+.square-item.red.selected {
+    background-color: var(--red);
+}
+.square-item.purple:hover {
+    background-color: var(--lightPurple);
+}
+.square-item.purple.selected {
+    background-color: var(--purple);
+}
+.square-item.yellow:hover {
+    background-color: var(--lightYellow);
+}
+.square-item.yellow.selected {
+    background-color: var(--yellow);
+}
+
+
+#solve-button {
+    margin: 5vh 25vw;
+    width: 50vw;
+    height: 10vh;
+    font-size: 3rem;
+}
+
+#health-bar {
+    position: relative;
+    height: 5vh;
+    border: 2px solid black;
+    background-color: aqua;
+}
+
+#health-bar span {
+    position: absolute;
+    background-color: blue;
+    height: 100%;
+    width: 0%;
+    
+}
+
+/* not used */
+.hide {
+    display: none;
+}
