@@ -36,19 +36,33 @@ function solve() {
         pieceOrientationsArr.push(getPieceOrientations(x));
     })
 
+    //don't solve thing that don't even have 27 cubes
+    let numberOfCubes = optimizedTotalCubes(pieceArray[0],pieceArray[1],pieceArray[2],pieceArray[3],pieceArray[4]);
+    if(numberOfCubes != 27) {
+        alert(`Your pieces have ${numberOfCubes} cubes in total. It should be 27.`);
+        return;
+    }
 
     solutionExists = false;
     let a, b, c, d, e;
     let count = 0;
 
     for(a=0; a<pieceOrientationsArr[0].length; a++) {
+        let testPieceA = copy333Array(pieceOrientationsArr[0][a]);
         for(b=0; b<pieceOrientationsArr[1].length; b++) {
+            testPieceB = opitimizedAddAndCollisonCheck(testPieceA, pieceOrientationsArr[1][b]);
+            if(testPieceB===false) continue;
             for(c=0; c<pieceOrientationsArr[2].length; c++) {
+                testPieceC = opitimizedAddAndCollisonCheck(testPieceB, pieceOrientationsArr[2][c]);
+                if(testPieceC===false) continue;
                 for(d=0; d<pieceOrientationsArr[3].length; d++) {
+                    testPieceD = opitimizedAddAndCollisonCheck(testPieceC, pieceOrientationsArr[3][d]);
+                    if(testPieceD===false) continue;
                     for(e=0; e<pieceOrientationsArr[4].length; e++) {
-                        if(doesSolutionWork(pieceOrientationsArr[0][a],
-                            pieceOrientationsArr[1][b], pieceOrientationsArr[2][c],
-                            pieceOrientationsArr[3][d], pieceOrientationsArr[4][e])) {
+                        testPieceE = opitimizedAddAndCollisonCheck(testPieceD, pieceOrientationsArr[4][e]);
+                        if(testPieceE===false) continue;
+
+                        if(optimizedisArrayFilled(testPieceE)) {
                                 displaySolution(pieceOrientationsArr[0][a],
                                     pieceOrientationsArr[1][b], pieceOrientationsArr[2][c],
                                     pieceOrientationsArr[3][d], pieceOrientationsArr[4][e]);
@@ -60,24 +74,97 @@ function solve() {
                 }
             }
         }
-        console.log("%Complete", Math.floor(100*count/(pieceOrientationsArr[0].length*pieceOrientationsArr[1].length
+        //console log the percent completed
+        const permutationLocation = 
+        a*pieceOrientationsArr[1].length*pieceOrientationsArr[2].length*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length
+        +b*pieceOrientationsArr[2].length*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length
+        +c*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length
+        +d*pieceOrientationsArr[4].length
+        +e;
+        console.log("%Complete", Math.floor(100*permutationLocation/(pieceOrientationsArr[0].length*pieceOrientationsArr[1].length
             *pieceOrientationsArr[2].length*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length)));
     }
 
-    if(!solutionExists) alert('No solution');
+    //let the user know what happened
+    if(!solutionExists) {
+        alert('No Solution!');
+    } else {
+        alert('Solved! Scroll up to see orthographic');
+    }
     console.log('solutionExists?', solutionExists);
 
+
     loadDataAnimation();
+
+
+    //tries to add the two arrays and return the combined array
+    //However, if the two arrays collide, false is returned
+    function opitimizedAddAndCollisonCheck(arr1, arr2) {
+        const returnArr = new333Array();
+        for(let i=0; i<3; i++) {
+            for(let j=0; j<3; j++) {
+                for(let k=0; k<3; k++) {
+                    const sum = arr1[i][j][k] + arr2[i][j][k];
+                    if(sum==2) {
+                        return false; //collison
+                    } else {
+                        returnArr[i][j][k] = sum;
+                    }
+                }
+            }
+        }
+        return returnArr;
+    }
+
+    //returns true if array is filled, otherwise false
+    //assumes that there are no collisons
+    function optimizedisArrayFilled(arr) {
+        for(let i=0; i<3; i++) {
+            for(let j=0; j<3; j++) {
+                for(let k=0; k<3; k++) {
+                    if(arr[i][j][k] == 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    //returns the total cubes the five pieces have
+    function optimizedTotalCubes(arr1,arr2,arr3,arr4,arr5) {
+        let count = 0;
+        for(let i=0; i<3; i++) {
+            for(let j=0; j<3; j++) {
+                for(let k=0; k<3; k++) {
+                    if(arr1[i][j][k] == 1) count++;
+                    if(arr2[i][j][k] == 1) count++;
+                    if(arr3[i][j][k] == 1) count++;
+                    if(arr4[i][j][k] == 1) count++;
+                    if(arr5[i][j][k] == 1) count++;
+                }
+            }
+        }
+        return count;
+    }
 
     function loadDataAnimation() {
         const healthbar = document.querySelector('#health-bar span');
         const permutations = document.getElementById('permutations');
+        const permutationsSkipped = document.getElementById('permutations-skipped');
         const excecutionTime = document.getElementById('excecution-time');
 
         const totalPermutations = pieceOrientationsArr[0].length*pieceOrientationsArr[1].length
         *pieceOrientationsArr[2].length*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length;
+        const permutationLocation = 
+            a*pieceOrientationsArr[1].length*pieceOrientationsArr[2].length*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length
+            +b*pieceOrientationsArr[2].length*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length
+            +c*pieceOrientationsArr[3].length*pieceOrientationsArr[4].length
+            +d*pieceOrientationsArr[4].length
+            +e;
 
         permutations.innerText = `Permutations Searched: ${count}/${totalPermutations}`;
+        permutationsSkipped.innerText = `Permutations Skipped With Collisons Optimization: ${permutationLocation-count}`;
         excecutionTime.innerText = `Excecution Time: ${Date.now() - start}ms`;
     }
 }
