@@ -6,7 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Puzzle Cube Solver</title>
   <link rel="stylesheet" href="styles.css">
+  <script type="module" src="threeScene.js"></script>
+  <script type="module" src="multiColorThreeScene.js"></script>
   <script src="script.js" defer></script>
+  <!-- this script only controls the Threescenes -->
+  <script type="module" src="mainScene.js"></script> 
 </head>
 
 <body>
@@ -20,6 +24,7 @@
     <span>Back</span>
     <span>Left</span>
     <span>Bot</span>
+    <span>Iso</span>
     <div data-orthoContainer data-orthoFront class="square-container">
       <div class="square-item"></div>
       <div class="square-item"></div>
@@ -86,6 +91,7 @@
       <div class="square-item"></div>
       <div class="square-item"></div>
     </div>
+    <div data-solutionIsometric></div>
   </div>
 
   <h1>**Piece Editor**</h1>
@@ -97,6 +103,7 @@
     <span>Bot</span>
     <span>Mid</span>
     <span>Top</span>
+    <span>Isometric</span>
     <div data-squareContainer class="square-container">
       <div class="square-item blue selected"></div>
       <div class="square-item blue"></div>
@@ -130,6 +137,7 @@
       <div class="square-item blue"></div>
       <div class="square-item blue"></div>
     </div>
+    <div data-pieceScene></div>
     <button>Show Orthographic</button>
   </div>
 
@@ -138,6 +146,7 @@
     <span>Bot</span>
     <span>Mid</span>
     <span>Top</span>
+    <span>Isometric</span>
     <div data-squareContainer class="square-container">
       <div class="square-item green selected"></div>
       <div class="square-item green"></div>
@@ -171,6 +180,7 @@
       <div class="square-item green"></div>
       <div class="square-item green"></div>
     </div>
+    <div data-pieceScene></div>
     <button>Show Orthographic</button>
   </div>
 
@@ -179,6 +189,7 @@
     <span>Bot</span>
     <span>Mid</span>
     <span>Top</span>
+    <span>Isometric</span>
     <div data-squareContainer class="square-container">
       <div class="square-item red selected"></div>
       <div class="square-item red"></div>
@@ -212,6 +223,7 @@
       <div class="square-item red"></div>
       <div class="square-item red"></div>
     </div>
+    <div data-pieceScene></div>
     <button>Show Orthographic</button>
   </div>
 
@@ -220,6 +232,7 @@
     <span>Bot</span>
     <span>Mid</span>
     <span>Top</span>
+    <span>Isometric</span>
     <div data-squareContainer class="square-container">
       <div class="square-item purple selected"></div>
       <div class="square-item purple"></div>
@@ -253,6 +266,7 @@
       <div class="square-item purple"></div>
       <div class="square-item purple"></div>
     </div>
+    <div data-pieceScene></div>
     <button>Show Orthographic</button>
   </div>
 
@@ -261,6 +275,7 @@
     <span>Bot</span>
     <span>Mid</span>
     <span>Top</span>
+    <span>Isometric</span>
     <div data-squareContainer class="square-container">
       <div class="square-item yellow selected"></div>
       <div class="square-item yellow"></div>
@@ -294,6 +309,7 @@
       <div class="square-item yellow"></div>
       <div class="square-item yellow"></div>
     </div>
+    <div data-pieceScene></div>
     <button>Show Orthographic</button>
   </div>
 
@@ -306,7 +322,10 @@
   <div id="permutations">Permutations: 0/0 </div>
   <div id="permutations-skipped">Permutations skipped with collsions optimization: 0 </div>
   <div id="excecution-time">Excecution Time: 0ms</div>
+  <!-- <h3>Solving May Take A Few Seconds. Do Not Spam The Button</h3> -->
   <h3>Orthographic will be displayed at the top of the page when completed</h3>
+  <!-- <h3>Screen May Freeze For One Second</h3> -->
+  <!-- <h3>Open Console Beforehand for Percentage Updates</h3> -->
 
 
 

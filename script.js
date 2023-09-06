@@ -23,7 +23,6 @@ addEventListenerForPieces();
 solveButton.addEventListener('click', solve);
 
 
-
 //FUNCTIONS - SOLVE
 let pieceArray;
 let pieceOrientationsArr = [];
@@ -67,6 +66,14 @@ function solve() {
                                     pieceOrientationsArr[1][b], pieceOrientationsArr[2][c],
                                     pieceOrientationsArr[3][d], pieceOrientationsArr[4][e]);
                                     solutionExists = true;
+
+                                    // store the correct orientation of each piece into cookie
+                                    localStorage.setItem('bluePiece', JSON.stringify(pieceOrientationsArr[0][a]));
+                                    localStorage.setItem('greenPiece', JSON.stringify(pieceOrientationsArr[1][b]));
+                                    localStorage.setItem('redPiece', JSON.stringify(pieceOrientationsArr[2][c]));
+                                    localStorage.setItem('purplePiece', JSON.stringify(pieceOrientationsArr[3][d]));
+                                    localStorage.setItem('yellowPiece', JSON.stringify(pieceOrientationsArr[4][e]));
+                                    window.dispatchEvent(new Event('renderIsometric'));
                                     break;
                         }
                         count++;
